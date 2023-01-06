@@ -26,7 +26,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	private boolean isRunning = true;
 	private final int WIDTH = 320;
 	private final int HEIGHT = 180;
-	private final int SCALE = 2;
+	private final int SCALE = 6;
 	private  BufferedImage image;
 	public List<Entity> entities;
 	public static Spritesheet spritesheet;
