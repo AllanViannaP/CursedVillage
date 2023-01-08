@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import com.AllanViannaP.entities.Entity;
 import com.AllanViannaP.entities.Player;
 import com.AllanViannaP.graphics.Spritesheet;
+import com.AllanViannaP.world.World;
 
 
 public class Game extends Canvas implements Runnable,KeyListener{
@@ -31,6 +32,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	public List<Entity> entities;
 	public static Spritesheet spritesheet;
 	private Player player;
+	public static World world;
 	
 	public Game() {
 		addKeyListener(this);
@@ -40,8 +42,10 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
 		spritesheet = new Spritesheet("/SpriteSheet.png");
+		world = new World("/map.png");
 		player = new Player(0,0,16,16,spritesheet.getSprite(0,0,16,16));
 		entities.add(player);
+		
 	}
 	
 	public void initFrame() {
@@ -90,11 +94,13 @@ public class Game extends Canvas implements Runnable,KeyListener{
 			return;
 		}
 		Graphics g = image.getGraphics();
-		g.setColor(new Color(0,144,255));
+		g.setColor(new Color(0,0,0));
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		//Render game
 		//Graphics2d g2 = (Graphics2D) g;
+		world.render(g);
+		
 		for(int i=0; i<entities.size();i++) {
 			Entity e =  entities.get(i);
 			e.render(g);
