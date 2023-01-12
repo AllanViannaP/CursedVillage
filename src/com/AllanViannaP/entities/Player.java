@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import com.AllanViannaP.main.Game;
+import com.AllanViannaP.world.Camera;
 
 public class Player extends Entity {
 
@@ -98,32 +99,35 @@ public class Player extends Entity {
 				}
 			}
 		}
+		
+		Camera.x =  this.getX() - (Game.WIDTH/2);
+		Camera.y =  this.getY() - (Game.HEIGHT/2);
 		}
 	
 	public void render(Graphics g) {
 	
 		if(dir == right_dir && moved) {
-		g.drawImage(rightPlayer[index], this.getX(),this.getY(),null);}
+		g.drawImage(rightPlayer[index], this.getX()-Camera.x,this.getY()-Camera.y,null);}
 		else if(dir == left_dir && moved) {
-		g.drawImage(leftPlayer[index], this.getX(),this.getY(),null);}
+		g.drawImage(leftPlayer[index], this.getX()-Camera.x,this.getY()-Camera.y,null);}
 		
 
 		if(dir == up_dir && moved) {
-		g.drawImage(upPlayer[index], this.getX(),this.getY(),null);		
+		g.drawImage(upPlayer[index], this.getX()-Camera.x,this.getY()-Camera.y,null);		
 		}
 		else if(dir == down_dir && moved) {
-		g.drawImage(downPlayer[index], this.getX(),this.getY(),null);	
+		g.drawImage(downPlayer[index], this.getX()-Camera.x,this.getY()-Camera.y,null);	
 		}
 		
 		if(dir == right_dir && moved == false) {
-			g.drawImage(rightPlayer[idleIndex], this.getX(),this.getY(),null);}
+			g.drawImage(rightPlayer[idleIndex], this.getX()-Camera.x,this.getY()-Camera.y,null);}
 			else if(dir == left_dir && moved == false) {
-			g.drawImage(leftPlayer[idleIndex], this.getX(),this.getY(),null);}
+			g.drawImage(leftPlayer[idleIndex], this.getX()-Camera.x,this.getY()-Camera.y,null);}
 			
 		if(dir == up_dir && moved == false) {
-			g.drawImage(upPlayer[idleIndex], this.getX(),this.getY(),null);}
+			g.drawImage(upPlayer[idleIndex], this.getX()-Camera.x,this.getY()-Camera.y,null);}
 			else if(dir == down_dir && moved == false) {
-			g.drawImage(downPlayer[idleIndex], this.getX(),this.getY(),null);}
+			g.drawImage(downPlayer[idleIndex], this.getX()-Camera.x,this.getY()-Camera.y,null);}
 		
 }
 	}

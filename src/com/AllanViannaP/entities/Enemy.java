@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import com.AllanViannaP.main.Game;
+import com.AllanViannaP.world.Camera;
 
 public class Enemy extends Entity{
 
@@ -36,7 +37,7 @@ public class Enemy extends Entity{
 	}
 	
 	public void render(Graphics g){
-		g.drawImage(BLOOD_PHANTOM_RIGHT[0], this.getX(),this.getY(),null);
+		g.drawImage(BLOOD_PHANTOM_RIGHT[0], this.getX()-Camera.x,this.getY()-Camera.y,null);
 		
 	}
 

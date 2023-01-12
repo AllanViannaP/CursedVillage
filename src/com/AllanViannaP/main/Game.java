@@ -21,13 +21,18 @@ import com.AllanViannaP.world.World;
 
 public class Game extends Canvas implements Runnable,KeyListener{
 
+	//Config JFrame and logic
 	private static final long serialVersionUID = 1L;
 	private static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
-	private final int WIDTH = 320;
-	private final int HEIGHT = 180;
+	
+	//Tam window
+	public static final int WIDTH = 320;
+	public static final int HEIGHT = 180;
 	private final int SCALE = 2;
+	
+	//Var 
 	private  BufferedImage image;
 	public static List<Entity> entities;
 	public static Spritesheet spritesheet;
