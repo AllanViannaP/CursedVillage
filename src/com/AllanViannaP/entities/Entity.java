@@ -3,6 +3,8 @@ package com.AllanViannaP.entities;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import com.AllanViannaP.main.Game;
+
 public class Entity {
 
 	protected double x;
@@ -11,6 +13,7 @@ public class Entity {
 	protected int height;
 	
 	private BufferedImage sprite;
+	
 	
 	public Entity(int x, int y, int width, int height, BufferedImage sprite) {
 		this.x = x;

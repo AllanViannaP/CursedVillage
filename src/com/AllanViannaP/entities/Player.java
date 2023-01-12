@@ -37,6 +37,7 @@ public class Player extends Entity {
 			  downPlayer[i] = Game.spritesheet.getSprite(32+(i*16), 32, 16, 16);
 			  upPlayer[i] = Game.spritesheet.getSprite(32+(i*16), 48, 16, 16);
 			}
+		  
 		  for(int i=8;i<10;i++) {
 			  rightPlayer[i] = Game.spritesheet.getSprite(0+((i-8)*16), 0, 16, 16);
 			  leftPlayer[i] = Game.spritesheet.getSprite(0+((i-8)*16), 16, 16, 16);

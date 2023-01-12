@@ -29,9 +29,9 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	private final int HEIGHT = 180;
 	private final int SCALE = 2;
 	private  BufferedImage image;
-	public List<Entity> entities;
+	public static List<Entity> entities;
 	public static Spritesheet spritesheet;
-	private Player player;
+	public static Player player;
 	public static World world;
 	
 	public Game() {
@@ -42,10 +42,10 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
 		spritesheet = new Spritesheet("/SpriteSheet.png");
-		world = new World("/map.png");
-		
 		player = new Player(0,0,16,16,spritesheet.getSprite(0,0,16,16));
 		entities.add(player);
+		world = new World("/map.png");
+		
 		
 	}
 	
