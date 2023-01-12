@@ -43,6 +43,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		entities = new ArrayList<Entity>();
 		spritesheet = new Spritesheet("/SpriteSheet.png");
 		world = new World("/map.png");
+		
 		player = new Player(0,0,16,16,spritesheet.getSprite(0,0,16,16));
 		entities.add(player);
 		
