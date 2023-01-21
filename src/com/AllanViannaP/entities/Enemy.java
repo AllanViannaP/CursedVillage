@@ -5,14 +5,21 @@ import java.awt.image.BufferedImage;
 
 import com.AllanViannaP.main.Game;
 import com.AllanViannaP.world.Camera;
+import com.AllanViannaP.world.World;
 
 public class Enemy extends Entity{
+	
+	
+	
+	public double spd = 0.4;
 
 	private BufferedImage[] BLOOD_PHANTOM_RIGHT;
 	private BufferedImage[] BLOOD_PHANTOM_LEFT;
 	private BufferedImage[] BLOOD_PHANTOM_UP;
 	private BufferedImage[] BLOOD_PHANTOM_DOWN;
 	public  static BufferedImage BLOOD_PHANTOM_NULL = Game.spritesheet.getSprite(160, 0, 16, 16);
+	
+	
 	
 	
 	public Enemy(int x, int y, int width, int height, BufferedImage sprite) {
@@ -32,6 +39,19 @@ public class Enemy extends Entity{
 		
 	}
 	public void tick() {
+		if((int)x<Game.player.getX() && World.isFree((int)(x+spd), this.getY())) {
+			x+=spd;
+		}
+		else if((int)x>Game.player.getX() && World.isFree((int)(x-spd), this.getY())) {
+			x-=spd;
+		}
+		if((int)y<Game.player.getY()&& World.isFree(this.getX(), (int)(y+spd))) {
+			y+=spd;
+		}
+		else if((int)y>Game.player.getY()&& World.isFree(this.getX(), (int)(y-spd))) {
+			y-=spd;
+		}
+		
 		
 		
 	}

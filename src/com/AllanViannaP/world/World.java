@@ -31,10 +31,11 @@ public class World {
 					tiles[xx+(yy*WIDTH)] = new FloorTile(xx*TILE_SIZE,yy*TILE_SIZE,Tile.TITLE_FLOOR_GRASS);
 					if(pixelNow == 0xFFbd6868) {
 						tiles[xx+(yy*WIDTH)] = new FloorTile(xx*TILE_SIZE,yy*TILE_SIZE,Tile.TILE_FLOOR_YELLOW);
+						Game.entities.add(new Enemy(xx*TILE_SIZE,yy*TILE_SIZE,TILE_SIZE,TILE_SIZE,Enemy.BLOOD_PHANTOM_NULL));
 					}
 					else if(pixelNow == 0xFF87c293) { 
 						tiles[xx+(yy*WIDTH)] = new WallTile(xx*TILE_SIZE,yy*TILE_SIZE,Tile.TITLE_FLOOR_GRASS_CURVE_UP_R_UP);
-						Game.entities.add(new Enemy(xx*TILE_SIZE,yy*TILE_SIZE,TILE_SIZE,TILE_SIZE,Enemy.BLOOD_PHANTOM_NULL));
+						
 					}
 				}
 			}
