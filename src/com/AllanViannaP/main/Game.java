@@ -32,17 +32,22 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	public static final int HEIGHT = 180;
 	private final int SCALE = 2;
 	
-	//Var 
+	//Var sprite
 	private  BufferedImage image;
+	//Entities list
 	public static List<Entity> entities;
+	//Load class 
 	public static Spritesheet spritesheet;
 	public static Player player;
 	public static World world;
 	
 	public Game() {
+		//Keys add
 		addKeyListener(this);
+		//Set window size and graphics 
 		setPreferredSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
 		initFrame();
+		
 		//Obj start
 		image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
@@ -54,6 +59,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		
 	}
 	
+	//Set frames
 	public void initFrame() {
 		frame = new JFrame("Cursed Village");
 		frame.add(this);
@@ -64,12 +70,14 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		frame.setVisible(true);
 	}
 	
+	//synchro and start game
 	public synchronized void start() {
 		thread =  new Thread(this);
 		isRunning = true;
 		thread.start();
 	}
 	
+	//synchro and stop game
 	public synchronized void stop() {
 		isRunning = false;
 		try {
@@ -80,37 +88,46 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		
 	}
 	
-	
+	//main init game
 	public static void main(String args[]) {
 		Game game = new Game();
 		game.start();
 	}
 	
+	//all logic
 	public void tick() {
+		//Init entities logic
 		for(int i=0; i<entities.size();i++) {
 			Entity e =  entities.get(i);
 			e.tick();
 		}
 	}
 	
+	//render all game
 	public void render() {
+		//Set buffer strategy and load 
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
 			this.createBufferStrategy(3);
 			return;
 		}
+		
+		//Clean and start graphics
 		Graphics g = image.getGraphics();
 		g.setColor(new Color(0,0,0));
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		//Render game
+		//Render World and game
 		//Graphics2d g2 = (Graphics2D) g;
 		world.render(g);
 		
+		//Render entities
 		for(int i=0; i<entities.size();i++) {
 			Entity e =  entities.get(i);
 			e.render(g);
 		}
+		
+		//Draw renders
 		g.dispose();
 		g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
@@ -120,6 +137,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
 	
 	public void run() {
+		//Fps limiter 
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
 		double ns = 1000000000/ amountOfTicks;
@@ -138,6 +156,8 @@ public class Game extends Canvas implements Runnable,KeyListener{
 				frames++;
 				check--;	
 			}
+			
+			//Fps check
 			if(System.currentTimeMillis() - timer >= 1000) {
 				System.out.println("FPS" + frames);
 				frames = 0;
@@ -152,6 +172,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	public void keyTyped(KeyEvent e) {
 		}
 
+	//Press move player
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT || e.getKeyCode()==KeyEvent.VK_D ) {
@@ -169,6 +190,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		
 	}
 
+	//Released stop player
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT || e.getKeyCode()==KeyEvent.VK_D ) {

@@ -12,27 +12,39 @@ import com.AllanViannaP.main.Game;
 
 public class World {
 
+	//var tiles
 	public static Tile[] tiles; 
+	
+	//Sprites size
 	public static int WIDTH,HEIGHT;
 	public static final int TILE_SIZE = 16;
 	
 	public World(String path) {
 		try {
+			//Load map
 			BufferedImage map = ImageIO.read(getClass().getResource(path));
+			// load pixels map
 			int[] pixels = new int[map.getWidth()*map.getHeight()];
+			//Check map
 			WIDTH = map.getWidth();
 			HEIGHT = map.getHeight();
 			tiles = new Tile[map.getWidth()*map.getHeight()];
+			//set RGB in map
 			map.getRGB(0, 0,map.getWidth(),map.getHeight(),pixels,0,map.getWidth());
 			
 			for(int xx = 0; xx < WIDTH;xx++) {	
 				for(int yy = 0; yy < HEIGHT; yy++) {
+					//pixel current check
 					int pixelNow = pixels[xx+(yy*map.getWidth())];
+					//Default pixel
 					tiles[xx+(yy*WIDTH)] = new FloorTile(xx*TILE_SIZE,yy*TILE_SIZE,Tile.TITLE_FLOOR_GRASS);
+					
+					//
 					if(pixelNow == 0xFFbd6868) {
 						tiles[xx+(yy*WIDTH)] = new FloorTile(xx*TILE_SIZE,yy*TILE_SIZE,Tile.TILE_FLOOR_YELLOW);
 						Game.entities.add(new Enemy(xx*TILE_SIZE,yy*TILE_SIZE,TILE_SIZE,TILE_SIZE,Enemy.BLOOD_PHANTOM_NULL));
 					}
+					//
 					else if(pixelNow == 0xFF87c293) { 
 						tiles[xx+(yy*WIDTH)] = new WallTile(xx*TILE_SIZE,yy*TILE_SIZE,Tile.TITLE_FLOOR_GRASS_CURVE_UP_R_UP);
 						
@@ -47,6 +59,7 @@ public class World {
 		}	
 	}
 	
+	//Collision in wall
 	public static boolean isFree(int xnext, int ynext) {
 		int x1 = xnext/TILE_SIZE;
 		int y1 = ynext/TILE_SIZE;
@@ -68,6 +81,7 @@ public class World {
 		
 	}
 	
+	//Render and set camera
 	public void render(Graphics g) {
 		int xstart = Camera.x>>4;
 		int ystart = Camera.y>>4;

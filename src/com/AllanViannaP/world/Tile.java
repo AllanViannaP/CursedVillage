@@ -7,6 +7,7 @@ import com.AllanViannaP.main.Game;
 
 public class Tile {
 
+	//Load sprite sheet
 	public static BufferedImage TILE_FLOOR_YELLOW =  Game.spritesheet.getSprite(272, 80, 16, 16);
 	public static BufferedImage TILE_FLOOR_YELLOW2 = Game.spritesheet.getSprite(272, 128, 16, 16);
 	public static BufferedImage TILE_FLOOR_YELLOW3 = Game.spritesheet.getSprite(256, 144, 16, 16);
@@ -46,15 +47,18 @@ public class Tile {
 	public static BufferedImage TITLE_FLOOR_GRASS_CURVE_DW_R_R = Game.spritesheet.getSprite(304, 160, 16, 16);
 	
 	private BufferedImage sprite;
+	
+	
 	private int x,y;
 	
+	//Set tile in map
 	public Tile(int x, int  y, BufferedImage sprite) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
 	}
 	
-	
+	//render tile
 	public void render(Graphics g) {
 		g.drawImage(sprite,x-Camera.x,y-Camera.y,null);
 		
