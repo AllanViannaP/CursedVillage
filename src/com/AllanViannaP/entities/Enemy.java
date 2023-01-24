@@ -72,6 +72,7 @@ public class Enemy extends Entity{
 		}}else {
 			//Collision with player
 			Game.player.life--;
+			Game.entities.remove(this);
 		}
 		
 		//Animation
@@ -89,11 +90,6 @@ public class Enemy extends Entity{
 		//set collision mask
 		Rectangle enemyCurrent = new Rectangle(this.getX()+maskx,this.getY()+masky,maskw,maskh);
 		Rectangle player = new Rectangle(Game.player.getX(),Game.player.getY(),16,16);
-		
-		
-		if(Game.player.life <=0) {
-		//reset quest	
-		}
 		
 		return enemyCurrent.intersects(player);
 	}

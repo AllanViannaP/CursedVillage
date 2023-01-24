@@ -42,6 +42,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	public static Player player;
 	public static World world;
 	public UI ui;
+
 	
 	public Game() {
 		//Keys add

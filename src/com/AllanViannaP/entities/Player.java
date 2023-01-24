@@ -13,6 +13,8 @@ public class Player extends Entity {
 	public boolean right,up,left,down;
 	//Speed 
 	public double spd = 0.8;
+	//HP
+	public int life = 1;
 	
 	//Animation vars
 	public int right_dir = 0, left_dir = 1, up_dir = 2, down_dir = 3;
@@ -26,8 +28,8 @@ public class Player extends Entity {
 	private BufferedImage[] upPlayer;
 	private BufferedImage[] downPlayer;
 
-	public int life = 1;
-	
+	//Itens
+	public boolean keys = false;
 	
 	public Player(int x, int y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
@@ -112,12 +114,49 @@ public class Player extends Entity {
 				}
 			}
 		}
+		//Check collisions
+		checkWell();
+		checkKeyDoor();
+		
+		//Check life
+		if(Game.player.life <=0) {
+			//reset quest	
+			
+			}
+			
 		
 		//Set camera in player
 		Camera.x =  Camera.clamp(this.getX()-(Game.WIDTH/2), 0, World.WIDTH*16-Game.WIDTH);
 		Camera.y =   Camera.clamp(this.getY()-(Game.HEIGHT/2), 0, World.HEIGHT*16-Game.HEIGHT);
 		}
 	
+	//Check well and pick key
+	public void checkWell() {
+		for(int i= 0; i<Game.entities.size();i++) {
+			Entity now = Game.entities.get(i);
+			if(now instanceof Well) {
+				if(Entity.isColliding(this, now) && Well.avaliable == true) {
+					keys = true;
+					Well.avaliable = false;
+				}
+			}
+		}
+		
+	}
+	
+	//Check the lock door 
+	public void checkKeyDoor() {
+		for(int i= 0; i<Game.entities.size();i++) {
+			Entity now = Game.entities.get(i);
+			if(now instanceof Door) {
+				if(Entity.isColliding(this, now) && keys == true) {
+					
+					//Change map
+				}
+			}
+		}
+		
+	}
 	
 	//All render
 	public void render(Graphics g) {
