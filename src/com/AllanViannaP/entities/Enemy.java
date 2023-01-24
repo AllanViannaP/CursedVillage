@@ -13,6 +13,7 @@ public class Enemy extends Entity{
 	
 	//Enemy speed
 	public double spd = 0.4;
+	
     //Animation var
 	public int right_dir = 0, left_dir = 1, up_dir = 2, down_dir = 3;
 	public int dir = right_dir;
@@ -88,6 +89,11 @@ public class Enemy extends Entity{
 		//set collision mask
 		Rectangle enemyCurrent = new Rectangle(this.getX()+maskx,this.getY()+masky,maskw,maskh);
 		Rectangle player = new Rectangle(Game.player.getX(),Game.player.getY(),16,16);
+		
+		
+		if(Game.player.life <=0) {
+		//reset quest	
+		}
 		
 		return enemyCurrent.intersects(player);
 	}
