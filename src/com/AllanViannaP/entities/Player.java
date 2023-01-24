@@ -144,12 +144,12 @@ public class Player extends Entity {
 		
 	}
 	
-	//Check the lock door 
+	//Open lock door 
 	public void checkKeyDoor() {
 		for(int i= 0; i<Game.entities.size();i++) {
 			Entity now = Game.entities.get(i);
 			if(now instanceof Door) {
-				if(Entity.isColliding(this, now) && keys == true) {
+				if(Entity.isColliding(this, now) && keys == true && Door.TypeDoor==1) {
 					
 					//Change map
 				}
@@ -157,6 +157,7 @@ public class Player extends Entity {
 		}
 		
 	}
+	
 	
 	//All render
 	public void render(Graphics g) {
