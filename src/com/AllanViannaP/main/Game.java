@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 
 import com.AllanViannaP.entities.Entity;
 import com.AllanViannaP.entities.Player;
+import com.AllanViannaP.entities.SwordHit;
 import com.AllanViannaP.graphics.Spritesheet;
 import com.AllanViannaP.graphics.UI;
 import com.AllanViannaP.world.World;
@@ -31,12 +32,13 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	//Tam window
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = 180;
-	private final int SCALE = 2;
+	private final int SCALE = 4;
 	
 	//Var sprite
 	private  BufferedImage image;
 	//Entities list
 	public static List<Entity> entities;
+	public static List<SwordHit> hits;
 	//Load class 
 	public static Spritesheet spritesheet;
 	public static Player player;
@@ -55,6 +57,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		ui = new UI();
 		image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
+		hits = new ArrayList<SwordHit>();
 		spritesheet = new Spritesheet("/SpriteSheet.png");
 		player = new Player(0,0,16,16,spritesheet.getSprite(0,0,16,16));
 		entities.add(player);
@@ -106,6 +109,10 @@ public class Game extends Canvas implements Runnable,KeyListener{
 			Entity e =  entities.get(i);
 			e.tick();
 		}
+		//Hits tick
+		for(int i=0; i<hits.size();i++) {
+			hits.get(i).tick();
+		}
 	}
 	
 	//render all game
@@ -130,6 +137,10 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		for(int i=0; i<entities.size();i++) {
 			Entity e =  entities.get(i);
 			e.render(g);
+		}
+		//Render hits
+		for(int i=0; i<hits.size();i++) {
+			hits.get(i).render(g);
 		}
 		//Draw UI
 		ui.render(g);
@@ -177,15 +188,16 @@ public class Game extends Canvas implements Runnable,KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+	
 		}
 
 	//Press move player
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode()==KeyEvent.VK_RIGHT || e.getKeyCode()==KeyEvent.VK_D ) {
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT|| e.getKeyCode()==KeyEvent.VK_D) {
 			player.right = true;
 		}
-		else if(e.getKeyCode()==KeyEvent.VK_LEFT || e.getKeyCode()==KeyEvent.VK_A) {
+		else if(e.getKeyCode()==KeyEvent.VK_LEFT|| e.getKeyCode()==KeyEvent.VK_A) {
 				player.left = true;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP|| e.getKeyCode()==KeyEvent.VK_W) {
@@ -212,6 +224,10 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		else if(e.getKeyCode()==KeyEvent.VK_DOWN || e.getKeyCode()==KeyEvent.VK_S) {
 			player.down = false;
 	}
+		//Hit 
+		if(e.getKeyCode()==KeyEvent.VK_SPACE || e.getKeyCode()==KeyEvent.VK_Z || e.getKeyCode()==KeyEvent.VK_SHIFT   ) {
+			player.Hit = true;
+		}
 		
 	}
 
