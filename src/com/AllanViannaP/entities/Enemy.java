@@ -10,9 +10,11 @@ import com.AllanViannaP.world.World;
 
 public class Enemy extends Entity{
 	
-	
 	//Enemy speed
 	public double spd = 0.4;
+	//HP
+	private int life = 1;
+	
 	
     //Animation var
 	public int right_dir = 0, left_dir = 1, up_dir = 2, down_dir = 3;
@@ -72,7 +74,7 @@ public class Enemy extends Entity{
 		}}else {
 			//Collision with player
 			Game.player.life--;
-			Game.entities.remove(this);
+			//Game.entities.remove(this);
 		}
 		
 		//Animation
@@ -83,7 +85,29 @@ public class Enemy extends Entity{
 				if(index > maxIndex) {
 					index = 0;
 				}
-	}}
+	}
+			
+	collisionHit();
+	
+	if(life <= 0) {
+		Game.entities.remove(this);
+		return;
+	}
+	}
+	
+	//Collision with player hit
+	public void collisionHit() {
+		for(int i=0;i<Game.hits.size();i++) {
+			Entity e = Game.hits.get(i);
+			if(e instanceof SwordHit) {
+				if(Entity.isColliding(this, e)) {
+					life--;
+					return;
+				}
+			}
+		}
+	}
+	
 	
 	//Collision with Player 
 	public  boolean isCollidingPlayer() {
@@ -93,6 +117,8 @@ public class Enemy extends Entity{
 		
 		return enemyCurrent.intersects(player);
 	}
+	
+	
 	
 	//All render
 	public void render(Graphics g){

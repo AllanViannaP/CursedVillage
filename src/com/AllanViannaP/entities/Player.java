@@ -172,7 +172,7 @@ public class Player extends Entity {
 			dy = 1;
 			py = -8;
 				}
-			SwordHit hit = new SwordHit(this.getX()+px,this.getY()+py,16,16,null, dx, dy);
+			SwordHit hit = new SwordHit(this.getX()+px,this.getY()+py,10,10,null, dx, dy);
 			Game.hits.add(hit);	
 			}
 		
