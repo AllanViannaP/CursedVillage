@@ -3,11 +3,16 @@ package com.AllanViannaP.world;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 import com.AllanViannaP.entities.Enemy;
 import com.AllanViannaP.entities.Entity;
+import com.AllanViannaP.entities.Player;
+import com.AllanViannaP.entities.SwordHit;
+import com.AllanViannaP.graphics.Spritesheet;
+import com.AllanViannaP.graphics.UI;
 import com.AllanViannaP.main.Game;
 
 public class World {
@@ -79,6 +84,16 @@ public class World {
 				(tiles[x3+(y3*World.WIDTH)] instanceof WallTile)  ||
 				(tiles[x4+(y4*World.WIDTH)] instanceof WallTile));
 		
+	}
+	
+	public static void restartGame(String map) {
+
+		Game.entities.clear();
+		Game.entities = new ArrayList<Entity>();
+		Game.spritesheet = new Spritesheet("/SpriteSheet.png");
+		Game.player = new Player(0,0,16,16,Game.spritesheet.getSprite(0,0,16,16));
+		Game.entities.add(Game.player);
+		Game.world = new World("/"+map);
 	}
 	
 	//Render and set camera

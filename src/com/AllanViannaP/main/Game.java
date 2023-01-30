@@ -34,6 +34,9 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	public static final int HEIGHT = 180;
 	private final int SCALE = 4;
 	
+	//Current map
+	private String CUR_MAP = "Village";
+	
 	//Var sprite
 	private  BufferedImage image;
 	//Entities list
@@ -61,7 +64,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		spritesheet = new Spritesheet("/SpriteSheet.png");
 		player = new Player(0,0,16,16,spritesheet.getSprite(0,0,16,16));
 		entities.add(player);
-		world = new World("/map.png");
+		world = new World("/VillageMap.png");
 		
 		
 		
@@ -113,6 +116,21 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		for(int i=0; i<hits.size();i++) {
 			hits.get(i).tick();
 		}
+		
+		
+		//-----------------------------------------------------------------------------------------------------------------------//
+														//	CHANGE MAP
+		//-----------------------------------------------------------------------------------------------------------------------//
+		/*
+		if(entities.size() == 1 && CUR_MAP !="House") {
+			CUR_MAP = "House";
+			String newMap = CUR_MAP+"Map.png";
+			World.restartGame(newMap);
+		}*/
+		//-----------------------------------------------------------------------------------------------------------------------//
+		//-----------------------------------------------------------------------------------------------------------------------//
+		//-----------------------------------------------------------------------------------------------------------------------//
+		
 	}
 	
 	//render all game
